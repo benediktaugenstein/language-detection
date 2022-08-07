@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+  
+  <head>
+    <title>Language detection</title>
+    <link rel="shortcut icon" href="favicon.ico" />
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+    <link rel='stylesheet' href='https://fonts.googleapis.com/css?family=Roboto'>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <style>
+      html,body,h1,h2,h3,h4,h5,h6 {font-family: "Roboto", sans-serif}
+    </style>
+  </head>
+
+  <body>
+    
+    <!-- Page Container -->
+    <div class="w3-content w3-margin-top" style="max-width:600px;">
+      <div class="w3">
+        <div class="w3-container w3-card w3-white w3-margin-bottom" style="border-radius: 25px;">
+          <div class="w3-container">
+
+            <h2 class="w3-text-grey w3-padding-16">Language detection</h2>
+
+            <hr>
+
+            <form method="POST" name="myform">
+
+              <h3 class="w3-text-grey"><i class="fa fa-cloud-upload fa-fw w3-text-teal"></i> Audio upload</h3>
+              <input type="file" accept="audio/*" capture id="recorder" name="recorder"/>
+
+              <hr>
+
+              <h3 class="w3-text-grey"><i class="fa fa-headphones fa-fw w3-text-teal"></i> Listen</h3>
+              <audio id="player" controls></audio>
+              <p>Filename:
+                <span id="filename"></span>
+                <input type="hidden" name="audio_file" id="audio_file" placeholder="Filename">
+              </p>
+
+              <script>
+                const recorder = document.getElementById('recorder');
+                const player = document.getElementById('player');
+
+                recorder.addEventListener('change', function(x){
+                  const file = x.target.files[0];
+                  const url = URL.createObjectURL(file);
+                  // Do something with the audio file.
+                  player.src = url;
+                  document.getElementById('filename').innerHTML = file['name']
+                  document.getElementById('audio_file').value = file['name']
+                });
+              </script>
+
+              <hr>
+
+              <h3 class="w3-text-grey"><i class="fa fa-magic fa-fw w3-text-teal"></i> Prediction</h3>
+
+              <input type="submit" value="Predict">
+
+            </form>
+            
+            <p>{{ result|safe }}</p>
+
+            <br></br>
+
+          </div>
+        </div>
+      </div>
+    </div>
+
+    
+  </body>
+  
+</html>

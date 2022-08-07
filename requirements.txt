@@ -1,0 +1,6 @@
+gunicorn
+flask
+tensorflow-cpu
+numpy
+IPython
+pathlib
