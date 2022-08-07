@@ -4,3 +4,4 @@ tensorflow-cpu
 numpy
 IPython
 pathlib
+matplotlib

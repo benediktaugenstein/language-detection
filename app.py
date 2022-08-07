@@ -3,16 +3,15 @@ import sys
 import os
 import pathlib
 
-import matplotlib.pyplot as plt
 import numpy as np
-import seaborn as sns
 import tensorflow as tf
 
 from tensorflow.keras import layers
 from tensorflow.keras import models
+from tensorflow import keras
 from IPython import display
 from myfuncs import *
-from flask import Flask, render_template, request, session
+from flask import Flask, render_template, request, session, redirect, url_for
 
 app = Flask(__name__)
 
@@ -24,17 +23,19 @@ app.secret_key='test'
 def my_form():
     return render_template('input.html')
 
-@app.route('/', methods=['POST'])
+@app.route('/', methods=['GET', 'POST'])
 
 def output():
-    #import tensorflow as tf
-
-    audio_file = request.form['filename']
-    classes = ['Italian' 'French' 'German']
+    if request.method == 'POST':
+        save_path = os.path.join("temp.wav")
+        request.files['recorder'].save(save_path)
+        audio_file = request.files['recorder']
+    classes = ['Italian', 'French', 'German']
     AUTOTUNE = tf.data.AUTOTUNE
 
-    ds = preprocess_dataset_prediction([str(audio_file)])
-    for spectrogram, label in sample_ds.batch(1):
+    ds = preprocess_dataset_prediction([str(save_path)])
+    max = 0
+    for spectrogram, label in ds.batch(1):
         prediction = model(spectrogram)
         class_predictions = tf.nn.softmax(prediction[0])
         for i, c in enumerate(classes):
@@ -43,7 +44,8 @@ def output():
                 max_class = c
     result = max_class
     result = str(result)
-    
+
+    #result = str(save_path)
     return render_template("input.html",result = result)
 
 #if __name__ == '__main__':

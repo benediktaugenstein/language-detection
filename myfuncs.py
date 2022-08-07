@@ -2,6 +2,9 @@
 
 # Preprocess WAV-file into tensor
 def decode_audio(audio_binary):
+  import tensorflow as tf
+  import os
+  
   # Decode WAV-encoded audio files to `float32` tensors, normalized
   # to the [-1.0, 1.0] range. Return `float32` audio and a sample rate.
   audio, _ = tf.audio.decode_wav(contents=audio_binary)
@@ -20,6 +23,7 @@ def get_label(file_path):
 
 # Combine both
 def get_waveform_and_label(file_path):
+  import tensorflow as tf
   label = get_label(file_path)
   audio_binary = tf.io.read_file(file_path)
   waveform = decode_audio(audio_binary)
@@ -27,6 +31,7 @@ def get_waveform_and_label(file_path):
 
 # Combine both
 def get_waveform_and_label_pred(file_path):
+  import tensorflow as tf
   label = 'German'
   audio_binary = tf.io.read_file(file_path)
   waveform = decode_audio(audio_binary)
@@ -34,6 +39,7 @@ def get_waveform_and_label_pred(file_path):
 
 # Get the spectrogram of a waveform
 def get_spectrogram(waveform):
+  import tensorflow as tf
   # Zero-padding for an audio waveform with less than 16,000 samples.
   input_len = 16000
   waveform = waveform[:input_len]
@@ -73,6 +79,8 @@ def plot_spectrogram(spectrogram, ax):
 
 # Get spectrogram and label
 def get_spectrogram_and_label_id(audio, label):
+  import tensorflow as tf
+  classes = ['Italian', 'French', 'German']
   spectrogram = get_spectrogram(audio)
   label_id = tf.math.argmax(label == classes)
   return spectrogram, label_id
@@ -89,7 +97,9 @@ def preprocess_dataset(files):
   return output_ds
 
 def preprocess_dataset_prediction(files):
-  #test = tf.data.Dataset.from_tensor_slices(files)
+  import tensorflow as tf
+  AUTOTUNE = tf.data.AUTOTUNE
+  files_ds = tf.data.Dataset.from_tensor_slices(files)
   output_ds = files_ds.map(
       map_func=get_waveform_and_label_pred,
       num_parallel_calls=AUTOTUNE)
