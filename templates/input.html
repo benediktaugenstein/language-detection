@@ -3,7 +3,7 @@
   
   <head>
     <title>Language detection</title>
-    <!--<link rel="shortcut icon" href="favicon.ico" />-->
+    <link rel="shortcut icon" href="{{ url_for('static', filename='favicon.ico') }}">
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
@@ -11,6 +11,31 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <style>
       html,body,h1,h2,h3,h4,h5,h6 {font-family: "Roboto", sans-serif}
+      .button {
+        background-color: #009688; /* Green */
+        border: none;
+        color: white;
+        padding: 5px 10px;
+        text-align: center;
+        text-decoration: none;
+        display: inline-block;
+        /*font-size: 16px;*/
+        margin: 4px 2px;
+        transition-duration: 0.4s;
+        cursor: pointer;
+      }
+
+      .button1 {
+        background-color: white; 
+        color: #009688; 
+        border: 2px solid #009688;
+        border-radius: 25px;
+      }
+
+      .button1:hover {
+        background-color: #009688;
+        color: white;
+      }
     </style>
   </head>
 
@@ -23,12 +48,21 @@
           <div class="w3-container">
 
             <h2 class="w3-text-grey w3-padding-16">Language detection</h2>
-
+            <hr>
+            <p> Languages: 
+              <ul>
+                <li>French</li>
+                <li>German</li>
+                <li>Italian</li>
+              </ul>
+            </p>
+            <p>Accuracy: <br>
+            70-80%</p>
             <hr>
 
             <form method="POST" name="myform" action="" enctype="multipart/form-data">
 
-              <h3 class="w3-text-grey"><i class="fa fa-cloud-upload fa-fw w3-text-teal"></i> Audio upload</h3>
+              <h3 class="w3-text-grey"><i class="fa fa-cloud-upload fa-fw w3-text-teal"></i> Audio upload <span style="font-size: 80%">- only ".wav" files</span></h3>
               <!--<input type="file" accept="audio/*" capture id="recorder" name="recorder"/>-->
               <input type="file" accept=".wav" id="recorder" name="recorder"/>
 
@@ -36,10 +70,6 @@
 
               <h3 class="w3-text-grey"><i class="fa fa-headphones fa-fw w3-text-teal"></i> Listen</h3>
               <audio id="player" controls></audio>
-              <p>Filename:
-                <span id="filename"></span>
-                <input type="hidden" name="audio_file" id="audio_file" placeholder="Filename">
-              </p>
 
               <script>
                 const recorder = document.getElementById('recorder');
@@ -60,14 +90,25 @@
 
               <h3 class="w3-text-grey"><i class="fa fa-magic fa-fw w3-text-teal"></i> Prediction</h3>
 
-              <input type="submit" value="Predict">
+              <input type="submit" class="button button1" value="Predict">
 
             </form>
             
             <p>{{ result|safe }}</p>
+            <p>{{ second_result|safe }}</p>
+            <p>{{ third_result|safe }}</p>
 
+            <hr>
+
+            <span style="float:right; font-size:70%; font-style:italic;">By Benedikt Augenstein</span>
             <br></br>
-
+            <span id="f" hidden>{{ finish|safe }}</span>
+            <script>
+              if (document.getElementById('f').innerHTML == 'finished') {
+                var url = location.href;
+                location.href = "#recorder";   
+              }
+            </script>
           </div>
         </div>
       </div>
