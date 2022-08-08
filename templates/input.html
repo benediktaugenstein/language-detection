@@ -80,9 +80,10 @@
                   const url = URL.createObjectURL(file);
                   // Do something with the audio file.
                   player.src = url;
-                  document.getElementById('filename').innerHTML = file['name']
-                  document.getElementById('audio_file').value = url
-                  console.log(url)
+                  document.getElementById('submit_button').removeAttribute("disabled");
+                  document.getElementById('filename').innerHTML = file['name'];
+                  document.getElementById('audio_file').value = url;
+                  //console.log(url)
                 });
               </script>
 
@@ -90,7 +91,7 @@
 
               <h3 class="w3-text-grey"><i class="fa fa-magic fa-fw w3-text-teal"></i> Prediction</h3>
 
-              <input type="submit" class="button button1" value="Predict">
+              <input type="submit" class="button button1" id="submit_button" value="Predict" disabled>
 
             </form>
             
