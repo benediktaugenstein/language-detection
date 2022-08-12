@@ -49,22 +49,29 @@
 
             <h2 class="w3-text-grey w3-padding-16">Language detection</h2>
             <hr>
-            <p> Languages: 
+            <h3 class="w3-text-grey"><i class="fa fa-info fa-fw w3-text-teal"></i> Possible Languages</h3>
+            <p>
               <ul>
+                <li>English</li>
                 <li>French</li>
                 <li>German</li>
                 <li>Italian</li>
               </ul>
             </p>
-            <p>Accuracy: <br>
-            70-80%</p>
             <hr>
 
-            <form method="POST" name="myform" action="" enctype="multipart/form-data">
+            <form method="POST" name="myform" id="myform" action="" enctype="multipart/form-data">
 
-              <h3 class="w3-text-grey"><i class="fa fa-cloud-upload fa-fw w3-text-teal"></i> Audio upload <span style="font-size: 80%">- only ".wav" files</span></h3>
+              <h3 class="w3-text-grey"><i class="fa fa-cloud-upload fa-fw w3-text-teal"></i> Audio Upload</h3>
               <!--<input type="file" accept="audio/*" capture id="recorder" name="recorder"/>-->
               <input type="file" accept=".wav" id="recorder" name="recorder"/>
+              <p> File specifications: 
+                <ul>
+                  <li>Only ".wav" files</li>
+                  <li>Can be any length, but for sufficient results and performance, 3-10 seconds are recommended</li>
+                </ul>
+                Such files can easily be created using the program <a href="https://www.audacity.de/" target="_blank">Audacity</a>.
+              </p>
 
               <hr>
 
@@ -81,24 +88,26 @@
                   // Do something with the audio file.
                   player.src = url;
                   document.getElementById('submit_button').removeAttribute("disabled");
-                  document.getElementById('filename').innerHTML = file['name'];
-                  document.getElementById('audio_file').value = url;
-                  //console.log(url)
                 });
+              function loading() {
+                document.getElementById('result_flask').innerHTML = '';
+                document.getElementById('loading_paragraph').innerHTML = 'Loading...';
+                document.getElementById("myform").submit();
+              }
               </script>
 
               <hr>
 
               <h3 class="w3-text-grey"><i class="fa fa-magic fa-fw w3-text-teal"></i> Prediction</h3>
 
-              <input type="submit" class="button button1" id="submit_button" value="Predict" disabled>
+              <input type="submit" class="button button1" id="submit_button" value="Predict" onclick="loading();" disabled>
 
             </form>
             
-            <p>{{ result|safe }}</p>
+            <p id="result_flask">{{ result|safe }}</p>
             <p>{{ second_result|safe }}</p>
             <p>{{ third_result|safe }}</p>
-
+            <p id="loading_paragraph"></p>
             <hr>
 
             <span style="float:right; font-size:70%; font-style:italic;">By Benedikt Augenstein</span>
