@@ -39,7 +39,7 @@ def output():
         save_path = os.path.join("temp.wav")
         request.files['recorder'].save(save_path)
         #audio_file = request.files['recorder']
-
+    max_ln = ''
     with sr.WavFile(save_path) as source:  # use "test.wav" as the audio source
         audio = speech_engine.record(source)
         max_conf = 0
@@ -80,8 +80,11 @@ def output():
     finish = 'finished'
     #result = str(preds)
     #result = str(save_path)
-    lang_dict = {'it':'Italian', 'fr':'French', 'de':'German', 'en':'English'}
-    lang_result = 'Detected language: ' + lang_dict[max_ln]
+    if max_ln=='':
+        lang_result = 'Sorry, language could not be detected.'
+    else:
+        lang_dict = {'it':'Italian', 'fr':'French', 'de':'German', 'en':'English'}
+        lang_result = 'Detected language: ' + lang_dict[max_ln]
     result = str(lang_result)
     return render_template("input.html",result = result, finish=finish) #second_result = second_result, third_result = third_result,
 
