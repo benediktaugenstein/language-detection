@@ -35,22 +35,40 @@ def my_form():
 @app.route('/', methods=['GET', 'POST'])
 
 def output():
+
     if request.method == 'POST':
+
         save_path = os.path.join("temp.wav")
         request.files['recorder'].save(save_path)
         #audio_file = request.files['recorder']
-    max_ln = ''
+
     with sr.WavFile(save_path) as source:  # use "test.wav" as the audio source
+
         audio = speech_engine.record(source)
         max_conf = 0
+
         for ln in languages:
             try:
-                conf = speech_engine.recognize_google(audio, language=ln)['alternative'][0]['confidence']
+
+                result = speech_engine.recognize_google(audio, language=ln)['alternative'][0]
+                conf = result['confidence']
+                transcript = result['transcript']
+
+                letters = transcript.replace(' ', '')
+                letter_count = len(letters)
+                word_count = len(transcript.split())
+
+                conf += 0.0065 * letter_count + 0.005 * word_count
+
             except:
+
                 conf = 0
+
             if conf>max_conf:
+
                 max_conf = conf
                 max_ln = ln
+
 
     """
     classes = ['Italian', 'French', 'German']
