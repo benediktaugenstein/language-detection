@@ -1,12 +1,13 @@
 -f https://download.pytorch.org/whl/torch_stable.html
 torch==1.12.1+cpu
+torchaudio==0.12.1+cpu
+tensorflow-cpu
 gunicorn
 flask
 numpy
 IPython
 pathlib
 jiwer
-torchaudio
 tqdm
 ffmpeg-python
 transformers
