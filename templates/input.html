@@ -90,7 +90,8 @@
                   document.getElementById('submit_button').removeAttribute("disabled");
                 });
               function loading() {
-                document.getElementById('result_flask').innerHTML = '';
+                document.getElementById('lang_result_flask').innerHTML = '';
+                document.getElementById('text_result_flask').innerHTML = '';
                 document.getElementById('loading_paragraph').innerHTML = 'Loading...';
                 document.getElementById("myform").submit();
               }
@@ -104,8 +105,8 @@
 
             </form>
             
-            <p id="result_flask">{{ result|safe }}</p>
-            <p>{{ second_result|safe }}</p>
+            <p id="lang_result_flask">{{ result|safe }}</p>
+            <p id="text_result_flask">{{ second_result|safe }}</p>
             <p>{{ third_result|safe }}</p>
             <p id="loading_paragraph"></p>
             <hr>
