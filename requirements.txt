@@ -1,7 +1,16 @@
 gunicorn
 flask
-tensorflow-cpu
+tensorflow
 numpy
 IPython
 pathlib
 matplotlib
+jiwer
+torch
+torchaudio
+torch
+torchaudio
+tqdm
+ffmpeg-python
+transformers
+pandas
