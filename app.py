@@ -1,23 +1,15 @@
 import os
 import sys
-import pathlib
+
+import numpy as np
+import pandas as pd
 
 import whisper
-
-import numpy as np
-
 import transformers
-
 import ffmpeg
-
-import numpy as np
-
 import torch
-import pandas as pd
 import torchaudio
-
 from tqdm.notebook import tqdm
-from IPython import display
 
 from flask import Flask, render_template, request, session, redirect, url_for, send_from_directory
 
