@@ -1,26 +1,14 @@
 import os
 import sys
-import os
 import pathlib
 
 import numpy as np
-import tensorflow as tf
 
-from tensorflow.keras import layers
-from tensorflow.keras import models
-from tensorflow import keras
 from IPython import display
-from myfuncs import *
-import speech_recognition as sr
+
 from flask import Flask, render_template, request, session, redirect, url_for, send_from_directory
 
 app = Flask(__name__)
-
-model = keras.models.load_model('models/language-detection.h5')
-
-speech_engine = sr.Recognizer()
-
-languages = ['it', 'fr', 'de', 'en']
 
 app.secret_key='test'
 
