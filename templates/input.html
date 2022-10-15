@@ -2,7 +2,7 @@
 <html lang="en">
   
   <head>
-    <title>Language Identification</title>
+    <title>Language Identification & Transcription</title>
     <link rel="shortcut icon" href="{{ url_for('static', filename='favicon.ico') }}">
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -36,6 +36,11 @@
         background-color: #009688;
         color: white;
       }
+      
+      p {
+        margin-left: 10px;
+      }
+      
     </style>
   </head>
 
@@ -72,7 +77,7 @@
 
               <h3 class="w3-text-grey"><i class="fa fa-headphones fa-fw w3-text-teal"></i> Listen</h3>
               <audio id="player" controls></audio>
-
+              
               <script>
                 const recorder = document.getElementById('recorder');
                 const player = document.getElementById('player');
@@ -94,7 +99,7 @@
 
               <hr>
 
-              <h3 class="w3-text-grey"><i class="fa fa-magic fa-fw w3-text-teal"></i> Language identification and transcription</h3>
+              <h3 class="w3-text-grey"><i class="fa fa-magic fa-fw w3-text-teal"></i>Identification & Transcription</h3>
 
               <input type="submit" class="button button1" id="submit_button" value="Click me" onclick="loading();" disabled>
 
