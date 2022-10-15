@@ -15,7 +15,9 @@ from flask import Flask, render_template, request, session, redirect, url_for, s
 
 app = Flask(__name__)
 
-model = whisper.load_model("base")
+#model = whisper.load_model("base")
+model = torch.load('models/base2.pt')
+model.eval()
 
 @app.route('/favicon.ico')
 def favicon():
