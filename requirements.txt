@@ -4,8 +4,6 @@ torchaudio==0.12.1+cpu
 gunicorn
 flask
 numpy
-IPython
-pathlib
 jiwer
 tqdm
 ffmpeg-python
