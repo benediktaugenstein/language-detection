@@ -4,10 +4,7 @@ tensorflow
 numpy
 IPython
 pathlib
-matplotlib
 jiwer
-torch
-torchaudio
 torch
 torchaudio
 tqdm
