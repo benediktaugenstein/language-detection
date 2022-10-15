@@ -41,7 +41,7 @@ def output():
         save_path = os.path.join("temp.wav")
         request.files['recorder'].save(save_path)
         #audio_file = request.files['recorder']
-
+    """
     with sr.WavFile(save_path) as source:  # use "test.wav" as the audio source
 
         audio = speech_engine.record(source)
@@ -70,7 +70,7 @@ def output():
                 max_ln = ln
 
 
-    """
+    
     classes = ['Italian', 'French', 'German']
     AUTOTUNE = tf.data.AUTOTUNE
 
@@ -94,7 +94,7 @@ def output():
     result = str(result)
     second_result = '2. ' + preds2[1][1] + ' - Confidence: ' + str(round(preds2[1][0]*100, 2)) + '%'
     third_result = '3. ' + preds2[2][1] + ' - Confidence: ' + str(round(preds2[2][0]*100, 2)) + '%'
-    """
+    
     finish = 'finished'
     #result = str(preds)
     #result = str(save_path)
@@ -103,6 +103,18 @@ def output():
     else:
         lang_dict = {'it':'Italian', 'fr':'French', 'de':'German', 'en':'English'}
         lang_result = 'Detected language: ' + lang_dict[max_ln]
+    """
+    DEVICE = "cuda" if torch.cuda.is_available() else "cpu"  # Set Runtime to GPU in Google Colab
+
+    model = whisper.load_model("base")
+
+    transcription = model.transcribe(save_path)
+    text = transcription['text']
+    lang_result = transcription['language']
+    
+    finish = 'finished'
+    result = str(lang_result)
+    finish = 'finished'
     result = str(lang_result)
     return render_template("input.html",result = result, finish=finish) #second_result = second_result, third_result = third_result,
 
