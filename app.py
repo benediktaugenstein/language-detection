@@ -15,7 +15,7 @@ from flask import Flask, render_template, request, session, redirect, url_for, s
 
 app = Flask(__name__)
 
-model = whisper.load_model("large")
+model = whisper.load_model("small")
 
 @app.route('/favicon.ico')
 def favicon():
