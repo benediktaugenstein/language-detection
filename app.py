@@ -110,14 +110,14 @@ def output():
     model = whisper.load_model("base")
 
     transcription = model.transcribe(save_path)
-    text = transcription['text']
-    lang_result = transcription['language']
-    
+
+    lang_result = 'Detected Language: ' + transcription['language']
+    text = 'Transcription: ' + transcription['text']
+
     finish = 'finished'
     result = str(lang_result)
-    finish = 'finished'
-    result = str(lang_result)
-    return render_template("input.html",result = result, finish=finish) #second_result = second_result, third_result = third_result,
+    second_result = str(text)
+    return render_template("input.html",result = result, second_result=second_result, finish=finish) #second_result = second_result, third_result = third_result,
 
 #if __name__ == '__main__':
     #app.run()
