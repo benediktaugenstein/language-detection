@@ -4,7 +4,7 @@ numpy
 IPython
 pathlib
 jiwer
-torch
+torch==1.12.1+cpu
 torchaudio
 tqdm
 ffmpeg-python
