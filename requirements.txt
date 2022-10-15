@@ -11,4 +11,4 @@ tqdm
 ffmpeg-python
 transformers
 pandas
-git+https://github.com/openai/whisper.git 
+
